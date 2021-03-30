@@ -1,5 +1,7 @@
 package com.ihsan.eurder.domain;
 
+import com.ihsan.eurder.infrastructure.ValidationUtil;
+
 import java.util.Objects;
 
 public class Customer {
@@ -11,6 +13,7 @@ public class Customer {
 
 
     public Customer(String firstName, String lastName, String email, String adress, String phoneNumber) {
+        ValidationUtil.throwExceptionIfNull(adress,"Adress");
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
