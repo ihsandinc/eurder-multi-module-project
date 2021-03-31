@@ -1,12 +1,15 @@
 package com.ihsan.eurder.api.controllers;
 
 import com.ihsan.eurder.api.item.CreateItemDto;
+import com.ihsan.eurder.api.item.GetItemDto;
 import com.ihsan.eurder.api.item.ItemDtoMapper;
 import com.ihsan.eurder.service.AuthorizationService;
 import com.ihsan.eurder.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/items")
@@ -21,6 +24,13 @@ public class ItemController {
         this.itemDtoMapper = itemDtoMapper;
         this.authorizationService = authorizationService;
     }
+
+    @GetMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GetItemDto> getItems() {
+        return itemDtoMapper.mapItemListToGetItemDtoList(itemService.getItems());
+    }
+
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)

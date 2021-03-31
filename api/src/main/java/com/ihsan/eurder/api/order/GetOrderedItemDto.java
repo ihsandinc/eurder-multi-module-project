@@ -22,10 +22,15 @@ public class GetOrderedItemDto {
         orders.add(getItemGroupDto);
     }
 
+    public CreateCustomerDto getCustomerDto() {
+        return customerDto;
+    }
 
+    public List<GetItemGroupDto> getOrders() {
+        return orders;
+    }
 
-
-
-
-
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 }

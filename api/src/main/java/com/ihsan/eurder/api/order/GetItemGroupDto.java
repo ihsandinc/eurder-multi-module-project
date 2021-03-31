@@ -15,4 +15,16 @@ public class GetItemGroupDto {
         this.price = price;
         this.shippingDate = shippingDate;
     }
+
+    public CreateItemDto getItem() {
+        return item;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public LocalDate getShippingDate() {
+        return shippingDate;
+    }
 }

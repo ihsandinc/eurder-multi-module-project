@@ -11,7 +11,7 @@ public class Order {
     private final UUID orderId;
     private final Customer customer;
     private final List<ItemGroup> orders;
-    private int totalPrice;
+    private double totalPrice;
 
     public Order(Customer customer, List<ItemGroup> orders) {
         orderId = UUID.randomUUID();
@@ -36,11 +36,11 @@ public class Order {
         return customer;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

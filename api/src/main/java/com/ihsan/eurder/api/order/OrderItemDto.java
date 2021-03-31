@@ -3,7 +3,11 @@ package com.ihsan.eurder.api.order;
 import java.util.List;
 
 public class OrderItemDto {
-    private final List<ItemGroupDto> itemGroupDtos;
+    private List<ItemGroupDto> itemGroupDtos;
+
+
+    public OrderItemDto() {
+    }
 
     public OrderItemDto(List<ItemGroupDto> ordersDto) {
         this.itemGroupDtos = ordersDto;
@@ -12,4 +16,6 @@ public class OrderItemDto {
     public List<ItemGroupDto> getItemGroupDtos() {
         return itemGroupDtos;
     }
+
+
 }

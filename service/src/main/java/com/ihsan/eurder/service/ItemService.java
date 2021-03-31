@@ -5,6 +5,8 @@ import com.ihsan.eurder.domain.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemService {
     private final ItemRepository itemRepository;
@@ -16,5 +18,9 @@ public class ItemService {
 
     public void addItem(Item itemToAdd) {
         itemRepository.addItemToRepository(itemToAdd);
+    }
+
+    public List<Item> getItems() {
+      return itemRepository.getItemsAsList();
     }
 }

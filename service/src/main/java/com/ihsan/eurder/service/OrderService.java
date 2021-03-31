@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Service
 public class OrderService {
@@ -22,14 +23,18 @@ public class OrderService {
     }
 
   public Order orderItems(Order order) {
-        int totalPriceOfOrder = 0;
+        double totalPriceOfOrder = 0;
       for (ItemGroup itemgroup:order.getOrders()
            ) {
-          if (itemRepository.hasItemWithEnoughAmount(itemgroup.getItem().getItemId(), itemgroup.getAmount())) {
+          UUID itemId = itemgroup.getItem().getItemId();
+          int amountOfOrder = itemgroup.getAmount();
+          if (itemRepository.hasItemWithEnoughAmount(itemId, amountOfOrder)) {
               itemgroup.setShippingDate(LocalDate.now().plusDays(1));
+              itemRepository.subtractItemAfterOrder(itemId, amountOfOrder);
           }
           else {
               itemgroup.setShippingDate(LocalDate.now().plusDays(7));
+              itemRepository.subtractItemAfterOrder(itemId, itemRepository.getItemById(itemId).getAmount());
           }
           totalPriceOfOrder += itemgroup.getPrice();
       }

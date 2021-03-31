@@ -3,6 +3,7 @@ package com.ihsan.eurder.domain.customer;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class CustomerRepository {
@@ -23,5 +24,9 @@ public class CustomerRepository {
 
     public boolean isCustomer(UUID id) {
         return customerMap.get(id) != null;
+    }
+
+    public List<Customer> getCustomersAsList() {
+        return new ArrayList<>(customerMap.values());
     }
 }
