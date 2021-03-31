@@ -34,8 +34,8 @@ public class ItemController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createItem(@RequestBody CreateItemDto createItemDto,@RequestHeader(value = "Authorization", required = false) String id) throws IllegalAccessException {
-        authorizationService.throwExceptionIfNotAdmin(id);
+    public void createItem(@RequestBody CreateItemDto createItemDto,@RequestHeader(value = "Authorization", required = false) String adminId) throws IllegalAccessException {
+        authorizationService.throwExceptionIfNotAdmin(adminId);
         itemService.addItem(itemDtoMapper.mapCreateItemDtoToItem(createItemDto));
     }
 

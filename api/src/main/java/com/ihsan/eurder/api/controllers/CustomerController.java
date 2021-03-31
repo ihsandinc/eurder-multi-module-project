@@ -29,7 +29,8 @@ public class CustomerController {
 
     @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<GetCustomerDto> getCustomers() {
+    public List<GetCustomerDto> getCustomers(@RequestHeader(value = "Authorization", required = false) String adminId) throws IllegalAccessException {
+        authorizationService.throwExceptionIfNotAdmin(adminId);
         return customerDtoMapper.mapCustomerListToGetCustomerDtoList(customerService.getCustomers());
     }
 
