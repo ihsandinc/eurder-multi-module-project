@@ -1,7 +1,7 @@
 package com.ihsan.eurder.service;
 
-import com.ihsan.eurder.domain.Item;
-import com.ihsan.eurder.domain.ItemRepository;
+import com.ihsan.eurder.domain.item.Item;
+import com.ihsan.eurder.domain.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

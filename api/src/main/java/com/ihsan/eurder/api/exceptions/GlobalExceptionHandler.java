@@ -13,4 +13,8 @@ public class GlobalExceptionHandler {
         response.sendError(HttpServletResponse.SC_FORBIDDEN, "You do not have access to this page: " + exception.getMessage());
     }
 
+
+
+
+
 }

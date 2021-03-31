@@ -1,4 +1,4 @@
-package com.ihsan.eurder.domain;
+package com.ihsan.eurder.domain.admin;
 
 import java.util.UUID;
 

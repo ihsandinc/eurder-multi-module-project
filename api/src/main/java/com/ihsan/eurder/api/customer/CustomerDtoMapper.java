@@ -1,6 +1,6 @@
-package com.ihsan.eurder.api;
+package com.ihsan.eurder.api.customer;
 
-import com.ihsan.eurder.domain.Customer;
+import com.ihsan.eurder.domain.customer.Customer;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,6 +12,14 @@ public class CustomerDtoMapper {
                 createCustomerDto.getEmail(),
                 createCustomerDto.getAdress(),
                 createCustomerDto.getPhoneNumber());
+    }
+
+    public CreateCustomerDto mapCustomerToCreateCustomerDto(Customer customer) {
+        return new CreateCustomerDto(customer.getFirstName(),
+                customer.getLastName(),
+                customer.getEmail(),
+                customer.getAdress(),
+                customer.getPhoneNumber());
     }
 
 

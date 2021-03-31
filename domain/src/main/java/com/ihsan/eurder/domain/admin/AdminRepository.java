@@ -1,5 +1,6 @@
-package com.ihsan.eurder.domain;
+package com.ihsan.eurder.domain.admin;
 
+import com.ihsan.eurder.domain.admin.Admin;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.UUID;
 
 @Repository
 public class AdminRepository {
-    private final Map<UUID,Admin> adminMap;
+    private final Map<UUID, Admin> adminMap;
 
 
     public AdminRepository() {

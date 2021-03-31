@@ -1,7 +1,7 @@
 package com.ihsan.eurder.service;
 
-import com.ihsan.eurder.domain.Customer;
-import com.ihsan.eurder.domain.CustomerRepository;
+import com.ihsan.eurder.domain.customer.Customer;
+import com.ihsan.eurder.domain.customer.CustomerRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +15,7 @@ class CustomerServiceTest {
         Customer customer = new Customer("Ihsan","Dinc","ihsan@gmail.com","Kumtich","04444444");
         customerService.createCustomer(customer);
 
-        assertNotNull(customerRepository.getCustomersList().get(0));
+        assertNotNull(customerRepository.getCustomerMap().get(customer.getCustomerId()));
 
 
     }

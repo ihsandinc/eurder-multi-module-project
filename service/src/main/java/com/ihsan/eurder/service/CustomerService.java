@@ -1,7 +1,7 @@
 package com.ihsan.eurder.service;
 
-import com.ihsan.eurder.domain.Customer;
-import com.ihsan.eurder.domain.CustomerRepository;
+import com.ihsan.eurder.domain.customer.Customer;
+import com.ihsan.eurder.domain.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

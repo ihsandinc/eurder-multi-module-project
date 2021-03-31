@@ -1,7 +1,8 @@
 package com.ihsan.eurder.api.controllers;
 
-import com.ihsan.eurder.api.CreateCustomerDto;
-import com.ihsan.eurder.api.CustomerDtoMapper;
+import com.ihsan.eurder.api.customer.CreateCustomerDto;
+import com.ihsan.eurder.api.customer.CustomerDtoMapper;
+import com.ihsan.eurder.service.AuthorizationService;
 import com.ihsan.eurder.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
    private final CustomerService customerService;
    private final CustomerDtoMapper customerDtoMapper;
+   private final AuthorizationService authorizationService;
 
    @Autowired
-    public CustomerController(CustomerService customerService, CustomerDtoMapper customerDtoMapper) {
+    public CustomerController(CustomerService customerService, CustomerDtoMapper customerDtoMapper, AuthorizationService authorizationService) {
         this.customerService = customerService;
        this.customerDtoMapper = customerDtoMapper;
+       this.authorizationService = authorizationService;
    }
 
     @PostMapping(consumes = "application/json")

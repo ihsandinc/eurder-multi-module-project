@@ -1,10 +1,12 @@
-package com.ihsan.eurder.domain;
+package com.ihsan.eurder.domain.customer;
 
 import com.ihsan.eurder.infrastructure.ValidationUtil;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Customer {
+    private final UUID customerId;
     private final String firstName;
     private final String lastName;
     private final String email;
@@ -13,12 +15,17 @@ public class Customer {
 
 
     public Customer(String firstName, String lastName, String email, String adress, String phoneNumber) {
+        this.customerId = UUID.randomUUID();
         ValidationUtil.throwExceptionIfNull(adress,"Adress");
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.adress = adress;
         this.phoneNumber = phoneNumber;
+    }
+
+    public UUID getCustomerId() {
+        return customerId;
     }
 
     public String getFirstName() {

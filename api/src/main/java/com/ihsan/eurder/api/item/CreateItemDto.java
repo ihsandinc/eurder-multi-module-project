@@ -1,29 +1,17 @@
-package com.ihsan.eurder.domain;
+package com.ihsan.eurder.api.item;
 
-import com.ihsan.eurder.infrastructure.ValidationUtil;
-
-import java.util.UUID;
-
-public class Item {
-
-    private UUID itemId;
+public class CreateItemDto {
     private String name;
     private String description;
     private double price;
     private int amount;
 
 
-    public Item(String name, String description, double price, int amount) {
-        itemId = UUID.randomUUID();
-        ValidationUtil.throwExceptionIfNull(name,"Name");
+    public CreateItemDto(String name, String description, double price, int amount) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.amount = amount;
-    }
-
-    public UUID getItemId() {
-        return itemId;
     }
 
     public String getName() {
@@ -42,3 +30,4 @@ public class Item {
         return amount;
     }
 }
+

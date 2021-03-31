@@ -1,7 +1,7 @@
 package com.ihsan.eurder.api.controllers;
 
-import com.ihsan.eurder.api.CreateItemDto;
-import com.ihsan.eurder.api.ItemDtoMapper;
+import com.ihsan.eurder.api.item.CreateItemDto;
+import com.ihsan.eurder.api.item.ItemDtoMapper;
 import com.ihsan.eurder.service.AuthorizationService;
 import com.ihsan.eurder.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class ItemController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createItem(@RequestBody CreateItemDto createItemDto,@RequestHeader(value = "Authorization", required = false) String id) throws IllegalAccessException {
         authorizationService.throwExceptionIfNotAdmin(id);
-        itemService.addItem(itemDtoMapper.mapCreateItemDtoMapperToItem(createItemDto));
+        itemService.addItem(itemDtoMapper.mapCreateItemDtoToItem(createItemDto));
     }
 
 
