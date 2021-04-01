@@ -27,4 +27,8 @@ public class GetItemGroupDto {
     public LocalDate getShippingDate() {
         return shippingDate;
     }
+
+
+
+
 }

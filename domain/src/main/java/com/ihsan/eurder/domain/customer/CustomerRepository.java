@@ -1,5 +1,6 @@
 package com.ihsan.eurder.domain.customer;
 
+import com.ihsan.eurder.infrastructure.exceptions.CustomerNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -28,5 +29,13 @@ public class CustomerRepository {
 
     public List<Customer> getCustomersAsList() {
         return new ArrayList<>(customerMap.values());
+    }
+
+    public Customer getCustomerById(UUID id) {
+        if (!customerMap.containsKey(id)) {
+            throw new CustomerNotFoundException();
+        }
+        else
+            return customerMap.get(id);
     }
 }

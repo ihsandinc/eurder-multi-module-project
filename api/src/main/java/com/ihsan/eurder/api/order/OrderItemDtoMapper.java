@@ -5,9 +5,11 @@ import com.ihsan.eurder.api.item.ItemDtoMapper;
 import com.ihsan.eurder.domain.customer.CustomerRepository;
 import com.ihsan.eurder.domain.item.ItemRepository;
 import com.ihsan.eurder.domain.order.ItemGroup;
+import com.ihsan.eurder.domain.order.ItemGroupShippingToday;
 import com.ihsan.eurder.domain.order.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -48,5 +50,12 @@ public class OrderItemDtoMapper {
         return new GetItemGroupDto(itemDtoMapper.mapItemToCreateItemDto(itemGroup.getItem()), itemGroup.getPrice(), itemGroup.getShippingDate());
     }
 
+    public ItemShippingTodayDto mapItemGroupShippingTodayToItemShippingTodayDto (ItemGroupShippingToday itemGroupShippingToday) {
+        return new ItemShippingTodayDto(mapItemGroupToGetItemGroupDto(itemGroupShippingToday.getItemGroup()),itemGroupShippingToday.getAdress());
+    }
+
+    public List<ItemShippingTodayDto> mapItemGroupShippingTodayListToItemShippingTodayDtoList(List<ItemGroupShippingToday> itemGroupShippingTodayList) {
+        return itemGroupShippingTodayList.stream().map(this::mapItemGroupShippingTodayToItemShippingTodayDto).collect(Collectors.toList());
+    }
 
 }

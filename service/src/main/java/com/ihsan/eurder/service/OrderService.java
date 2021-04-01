@@ -2,12 +2,15 @@ package com.ihsan.eurder.service;
 
 import com.ihsan.eurder.domain.item.ItemRepository;
 import com.ihsan.eurder.domain.order.ItemGroup;
+import com.ihsan.eurder.domain.order.ItemGroupShippingToday;
 import com.ihsan.eurder.domain.order.Order;
 import com.ihsan.eurder.domain.order.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,11 +33,11 @@ public class OrderService {
           int amountOfOrder = itemgroup.getAmount();
           if (itemRepository.hasItemWithEnoughAmount(itemId, amountOfOrder)) {
               itemgroup.setShippingDate(LocalDate.now().plusDays(1));
-              itemRepository.subtractItemAfterOrder(itemId, amountOfOrder);
+              subtractItemAmountFromRepo(itemId, amountOfOrder);
           }
           else {
               itemgroup.setShippingDate(LocalDate.now().plusDays(7));
-              itemRepository.subtractItemAfterOrder(itemId, itemRepository.getItemById(itemId).getAmount());
+              subtractItemAmountFromRepo(itemId, itemRepository.getItemById(itemId).getAmount());
           }
           totalPriceOfOrder += itemgroup.getPrice();
       }
@@ -43,8 +46,23 @@ public class OrderService {
       return order;
   }
 
+  public void subtractItemAmountFromRepo(UUID itemId,int amount) {
+        itemRepository.subtractItemAfterOrder(itemId,amount);
+  }
 
 
-
-
+    public List<ItemGroupShippingToday> getItemGroupsShippingToday() {
+        List<Order> orders = orderRepository.getAllOrders();
+        List <ItemGroupShippingToday> itemGroupsShippingTodayList = new ArrayList<>();
+        for (Order order: orders
+             ) {
+            for (ItemGroup itemGroup: order.getOrders()
+                 ) {
+                if (itemGroup.getShippingDate().equals(LocalDate.now().plusDays(1))) {
+                    itemGroupsShippingTodayList.add(new ItemGroupShippingToday(itemGroup, order.getCustomer().getAdress()));
+                }
+            }
+        }
+        return itemGroupsShippingTodayList;
+    }
 }

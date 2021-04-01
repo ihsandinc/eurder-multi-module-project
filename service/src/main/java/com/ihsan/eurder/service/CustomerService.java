@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CustomerService {
@@ -23,5 +24,9 @@ public class CustomerService {
 
     public List<Customer> getCustomers() {
        return customerRepository.getCustomersAsList();
+    }
+
+    public Customer getCustomerById(UUID id) {
+        return customerRepository.getCustomerById(id);
     }
 }

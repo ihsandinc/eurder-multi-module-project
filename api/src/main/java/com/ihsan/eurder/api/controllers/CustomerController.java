@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/customer")
@@ -24,6 +25,13 @@ public class CustomerController {
         this.customerService = customerService;
        this.customerDtoMapper = customerDtoMapper;
        this.authorizationService = authorizationService;
+   }
+
+   @GetMapping(path = "/{id}", produces = "application/json")
+   @ResponseStatus(HttpStatus.OK)
+   public GetCustomerDto getCustomer(@PathVariable UUID id,@RequestHeader(value = "Authorization", required = false) String adminId) throws IllegalAccessException {
+       authorizationService.throwExceptionIfNotAdmin(adminId);
+       return customerDtoMapper.mapCustomerToGetCustomerDto(customerService.getCustomerById(id));
    }
 
 
