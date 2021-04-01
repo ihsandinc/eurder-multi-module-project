@@ -29,5 +29,9 @@ public class ItemDtoMapper {
         return itemList.stream().map(this::mapItemToGetItemDto).collect(Collectors.toList());
     }
 
+    public Item mapUpdateItemDtoToItem(UpdateItemDto updateitemDto) {
+        return new Item(updateitemDto.getName(), updateitemDto.getDescription(), updateitemDto.getPrice(), updateitemDto.getAmount());
+    }
+
 }
 

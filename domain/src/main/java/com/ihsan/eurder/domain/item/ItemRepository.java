@@ -50,4 +50,13 @@ public class ItemRepository {
         itemStock.put(itemId,itemAfterOrder);
     }
 
+    public void updateItem(UUID id, Item newItem) {
+        if (!hasItem(id)) {
+            throw new ItemNotFoundException();
+        }
+        else {
+            itemStock.remove(id);
+            itemStock.put(newItem.getItemId(),newItem);
+        }
+    }
 }

@@ -3,6 +3,7 @@ package com.ihsan.eurder.api.controllers;
 import com.ihsan.eurder.api.item.CreateItemDto;
 import com.ihsan.eurder.api.item.GetItemDto;
 import com.ihsan.eurder.api.item.ItemDtoMapper;
+import com.ihsan.eurder.api.item.UpdateItemDto;
 import com.ihsan.eurder.domain.item.ItemStockOverview;
 import com.ihsan.eurder.service.AuthorizationService;
 import com.ihsan.eurder.service.ItemService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/items")
@@ -54,6 +56,13 @@ public class ItemController {
     public void createItem(@RequestBody CreateItemDto createItemDto,@RequestHeader(value = "Authorization", required = false) String adminId) throws IllegalAccessException {
         authorizationService.throwExceptionIfNotAdmin(adminId);
         itemService.addItem(itemDtoMapper.mapCreateItemDtoToItem(createItemDto));
+    }
+
+    @PutMapping(path = "/{id}" , consumes = "application/json")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateItem(@RequestBody UpdateItemDto updateItemDto, @PathVariable UUID id, @RequestHeader (value = "Authorization", required = false) String adminId) throws IllegalAccessException {
+        authorizationService.throwExceptionIfNotAdmin(adminId);
+        itemService.updateItem(id,itemDtoMapper.mapUpdateItemDtoToItem(updateItemDto));
     }
 
 

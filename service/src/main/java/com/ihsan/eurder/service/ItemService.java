@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,5 +37,9 @@ public class ItemService {
     public List<ItemStockOverview> getUrgentStockOverview() {
         return itemRepository.getItemsAsList().stream().map(ItemStockOverview::new).
                 filter(itemStockOverview -> itemStockOverview.getStockUrgency().equals(StockUrgencyIndicator.STOCK_LOW)).collect(Collectors.toList());
+    }
+
+    public void updateItem(UUID id, Item newItem) {
+        itemRepository.updateItem(id,newItem);
     }
 }
