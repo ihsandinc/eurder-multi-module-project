@@ -53,4 +53,20 @@ class ItemServiceTest {
 
     }
 
+    @Test
+    void updateItem_andThenItemUpdated() {
+        Item item3 = new Item("Algida","Ice Cream",3,15);
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(item);
+        itemList.add(item3);
+
+        itemService.addItem(item);
+        itemService.addItem(item2);
+        itemService.updateItem(item2.getItemId(),item3);
+
+        assertEquals(itemList,itemService.getItems());
+
+
+    }
+
 }

@@ -4,6 +4,7 @@ import com.ihsan.eurder.domain.customer.Customer;
 import com.ihsan.eurder.domain.item.Item;
 import com.ihsan.eurder.domain.item.ItemRepository;
 import com.ihsan.eurder.domain.order.ItemGroup;
+import com.ihsan.eurder.domain.order.ItemGroupShippingToday;
 import com.ihsan.eurder.domain.order.Order;
 import com.ihsan.eurder.domain.order.OrderRepository;
 import com.ihsan.eurder.infrastructure.exceptions.ItemNotFoundException;
@@ -67,6 +68,21 @@ class OrderServiceTest {
 
         assertEquals(0,itemRepository.getItemById(item.getItemId()).getAmount());
          assertEquals(1,itemRepository.getItemById(item2.getItemId()).getAmount());
+
+    }
+
+    @Test
+    void  getItemGroupsShippingToday() {
+        List<ItemGroup> itemGroupList = new ArrayList<>(List.of(itemGroup,itemGroup2));
+        Order order = new Order(customer,itemGroupList);
+        orderService.orderItems(order);
+
+        List<ItemGroupShippingToday> itemGroupListShipToday = new ArrayList<>();
+        ItemGroupShippingToday itemGroupShippingToday = new ItemGroupShippingToday(itemGroup2, customer.getAdress());
+        itemGroupListShipToday.add(itemGroupShippingToday);
+
+        assertEquals(itemGroupListShipToday,orderService.getItemGroupsShippingToday());
+
 
     }
 
